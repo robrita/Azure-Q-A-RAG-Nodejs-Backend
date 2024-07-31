@@ -21,6 +21,7 @@ module.exports = {
     async evaluate(question, answer) {
         const { gptUrl, headers } = config.azureOpenai;
         const results = await this.aisearch(question);
+        let resObj = {};
 
         const hints = results.map(v => v.content).join('\n\n');
         const files = results.map(v => v.file).join(',');
@@ -33,7 +34,10 @@ module.exports = {
             // max_tokens: 800,
             response_format: { type: 'json_object' }
         };
+
         logger.log('******************', 'evaluate body..', JSON.stringify({ body }));
+        // when no hints from RAG search
+        // if (!hints) return resObj;
 
         // api call to azure openai
         const { data } = await axios.post(gptUrl, body, { headers }) || {};
@@ -41,7 +45,6 @@ module.exports = {
         if (!content || data.error) throw new Error(content ? content.error : 'missing content!');
 
         logger.log('******************', 'evaluate content..', content);
-        let resObj = {};
 
         try {
             resObj = JSON.parse(content);
