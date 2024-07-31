@@ -5,7 +5,7 @@ import streamlit as st
 def show_sidebar():
     st.subheader("💡Info", anchor=False)
     st.write(
-        "This is a Streamlit app for **Q&A RAG Evaluator** with Nodejs backend api powered by Azure OpenAI."
+        "This is a Streamlit app for **Q&A Evaluator with RAG** with Nodejs backend api powered by Azure OpenAI."
     )
 
     st.subheader("🛠Technology Stack", anchor=False)

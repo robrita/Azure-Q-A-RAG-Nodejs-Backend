@@ -4,7 +4,7 @@
 
 # Azure Q&A RAG
 
-A Streamlit Q&A RAG with Nodejs backend api powered by Azure OpenAI
+A Streamlit Q&A Evaluator with RAG in Nodejs backend api powered by Azure OpenAI
 
 ### How to run?
 
