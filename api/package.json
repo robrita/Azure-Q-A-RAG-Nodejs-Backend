@@ -1,0 +1,42 @@
+{
+    "name": "qa-rag",
+    "description": "Q&A RAG powered by Azure OpenAI",
+    "version": "0.0.1",
+    "private": true,
+    "license": "MIT",
+    "author": "robert.b.rita",
+    "scripts": {
+        "exec": "node ./index.js",
+        "start": "cross-env process.env.LOCAL=1 npm run lint",
+        "watch": "nodemon ./index.js",
+        "lint": "eslint . && npm run exec",
+        "lintfix": "eslint --fix .",
+        "lintstart": "npm run lintfix && npm start",
+        "test": "jest",
+        "format": "prettier --single-quote --write *.js"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "eslint": "^7.0.0",
+        "eslint-config-standard": "^14.1.1",
+        "eslint-plugin-import": "^2.20.2",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-standard": "^4.0.1",
+        "jest": "^27.5.1",
+        "nodemon": "~2.0.4",
+        "prettier": "^2.0.5"
+    },
+    "dependencies": {
+        "@azure/identity": "^4.4.0",
+        "@azure/keyvault-secrets": "^4.8.0",
+        "axios": "^1.4.0",
+        "body-parser": "^1.19.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "tracer": "^1.1.6"
+    },
+    "engines": {
+        "node": ">=10"
+    }
+}
