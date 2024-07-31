@@ -1,7 +1,11 @@
+import os
 import requests
 import streamlit as st
 import app.pages
 import app.sidebar
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def prob1():
@@ -75,7 +79,7 @@ if __name__ == "__main__":
     start_button = st.button(
         "Validate", key="button_text_start", disabled=question == "" or answer == ""
     )
-    st.subheader("Solution:")
+    st.subheader("Feedback:")
 
     if start_button:
         with st.spinner("Processing ..."):
@@ -87,7 +91,7 @@ if __name__ == "__main__":
                 url = "http://localhost:3000/eval"
                 headers = {
                     "Content-Type": "application/json",
-                    "x-api-key": "4PHqt99DvHGK",
+                    "x-api-key": os.environ["APP_KEY"],
                 }
                 data = {"question": question, "answer": answer}
 
