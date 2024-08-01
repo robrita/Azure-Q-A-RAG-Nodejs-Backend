@@ -89,7 +89,7 @@ if __name__ == "__main__":
                     full_response = ""
                     message_placeholder = st.empty()
 
-                    url = "http://localhost:3000/eval"
+                    url = os.environ["API_URL"]
                     headers = {
                         "Content-Type": "application/json",
                         "x-api-key": os.environ["API_KEY"],
