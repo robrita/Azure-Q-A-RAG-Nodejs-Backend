@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
     # app sidebar
     with st.sidebar:
-        app.sidebar.show_sidebar()
+        appKey = app.sidebar.show_sidebar()
 
     # question items
     st.subheader("Question:")
@@ -82,28 +82,33 @@ if __name__ == "__main__":
     st.subheader("Feedback:")
 
     if start_button:
-        with st.spinner("Processing ..."):
-            try:
-                # Response generation
-                full_response = ""
-                message_placeholder = st.empty()
-
-                url = "http://localhost:3000/eval"
-                headers = {
-                    "Content-Type": "application/json",
-                    "x-api-key": os.environ["APP_KEY"],
-                }
-                data = {"question": question, "answer": answer}
-
-                response = requests.post(url, headers=headers, json=data)
-                resObj = response.json()
-
-                print("*************************", response.status_code, resObj)
-                message_placeholder.json(resObj)
-
-                # Clear results
-                if st.button(":red[Clear]", key="button_text_clear"):
+        if appKey == os.environ["APP_KEY"]:
+            with st.spinner("Processing ..."):
+                try:
+                    # Response generation
+                    full_response = ""
                     message_placeholder = st.empty()
 
-            except Exception as e:
-                st.error(f"An error occurred: {e}")
+                    url = "http://localhost:3000/eval"
+                    headers = {
+                        "Content-Type": "application/json",
+                        "x-api-key": os.environ["API_KEY"],
+                    }
+                    data = {"question": question, "answer": answer}
+
+                    response = requests.post(url, headers=headers, json=data)
+                    resObj = response.json()
+
+                    print("*************************", response.status_code, resObj)
+                    message_placeholder.json(resObj)
+
+                    # Clear results
+                    if st.button(":red[Clear]", key="button_text_clear"):
+                        message_placeholder = st.empty()
+
+                except Exception as e:
+                    st.error(f"An error occurred: {e}")
+
+        else:
+            st.error("Invalid Access Key!")
+            st.stop()
